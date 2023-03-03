@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD_ITEM } from '../../redux/action'
+import { ADD_ITEM, REMOVE_ITEM } from '../../redux/action'
 import './Main.css'
 
 const Main = () => {
@@ -9,8 +9,14 @@ const Main = () => {
     const dispatch = useDispatch()
 
     const handlechg = (id) => {
-        dispatch(ADD_ITEM,id)
+        
+        dispatch({type: ADD_ITEM, id: id})
     }
+
+    const handlechg1 = (id) => {
+        
+      dispatch({type: REMOVE_ITEM, id: id})
+  }
 
   return (
     <div className='box1'>
@@ -22,6 +28,7 @@ const Main = () => {
         <div>{val.title}</div>
         <div>{val.discription}</div>
         <button onClick={() => {handlechg(val.id)}}>add</button>
+        <button onClick={() => {handlechg1(val.id)}}>remove</button>
          </div>
          
      )

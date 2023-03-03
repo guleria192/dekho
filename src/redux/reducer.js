@@ -1,10 +1,11 @@
-import { ADD_ITEM } from "./action"
+import { ADD_ITEM, REMOVE_ITEM } from "./action"
 
 
 
 export const reducer = (state,action) => {
     let newList = [] ;
      let getCart 
+     let updateCart = [] ;
 switch (action.type) {
     
     case ADD_ITEM :  
@@ -26,6 +27,36 @@ switch (action.type) {
               cart : {...state.cart,getCart} 
             }        
        
+            
+     case REMOVE_ITEM : 
+     
+     const idRemove = action.id;
+        updateCart = state.cart.filter((val)=>{
+           
+            if(val.id !== idRemove) return val
+            else getCart = {...val}
+
+          
+        })
+
+
+        newList = state.list.map((val)=>{
+
+            if(val.id === getCart) {
+                  val.quantity = val.quantity + getCart.quantity 
+            }
+
+            return val
+        })
+
+
+        
+
+        return {...state,
+        list : {...newList} ,
+        cart : {...updateCart}
+    }
+
 
     default:
         return state
